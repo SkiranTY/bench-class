@@ -1,0 +1,25 @@
+<div class="col-md-6 offset-md-3 mt-5">
+    <form [formGroup]='empForm' (ngSubmit)='printForm()'>
+        <input type="text" name="empName" placeholder="Employee Name" formControlName='empName' id="empName"
+            class="form-control mb-3">
+        <input type="text" name="empAge" placeholder="Employee Age" formControlName='empAge' id="empAge"
+            class="form-control mb-3">
+        <div>
+            Skills
+            <button class="btn btn-outline-primary" type="button"
+            (click)='addSkill()'>Add Skill</button>
+        </div>
+        <div formArrayName='empSkills' 
+        *ngFor='let group of empForm.get("empSkills").controls; index as i'>
+            <div [formGroupName]='i'>
+                <input type="text" name="skill" id="{{'skill' + i}}" placeholder="Skill Name"
+                 class="form-control mb-3" formControlName='skill'>
+                <input type="radio"  formControlName='proficiency' value='beginner'>Beginner
+                <input type="radio"  formControlName='proficiency' value='intermediate'>Intermediate
+                <input type="radio"  formControlName='proficiency' value='Expert'>Expert
+            </div>
+            <button class="btn btn-dark" (click)='removeSkill(i)'>X</button>
+        </div>
+        <button class="btn btn-primary float-right" type="submit">Submit</button>
+    </form>
+</div>
